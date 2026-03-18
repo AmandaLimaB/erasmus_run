@@ -1,33 +1,28 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float velocidadeLateral = 10f; 
-    public float velocidadeFrente = 5f;
+    public float velocidade = 5f;
+    public GameManager gameManager;
+
+    void Update()
+    {
+        // Pega o input do teclado (A/D ou setas)
+        float x = Input.GetAxis("Horizontal");
+
+        // Move o jogador para os lados
+        transform.Translate(x * velocidade * Time.deltaTime, 0, 0);
+    }
+
     
-    private Rigidbody rb;
-
-    void Start()
+    void OnCollisionEnter(Collision collision)
     {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    void FixedUpdate()
-    {
-        Vector3 movimentoFrente = transform.forward * velocidadeFrente * Time.fixedDeltaTime;
-        float movimentoX = Input.GetAxis("Horizontal");
-        Vector3 movimentoLateral = transform.right * movimentoX * velocidadeLateral * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movimentoFrente + movimentoLateral);
-    }
-
-    void OnCollisionEnter(Collision colisor)
-    {
-        if (colisor.gameObject.CompareTag("Obstacle"))
+        // Se batermos em algo chamado "Obstaculo"
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
-            if (FindObjectOfType<GameManager>() != null)
-            {
-                FindObjectOfType<GameManager>().FinalizarJogo();
-            }
+            Debug.Log("Morreu!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
