@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   velocidade: 5
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 55830037}
 --- !u!1 &1643132531
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +465,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoverCenario
   velocidade: 5
+--- !u!1 &1857929883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2089140411786914816, guid: e72bf86ba44091e41b18bf68d068d15b, type: 3}
+  m_PrefabInstance: {fileID: 4447739399138378474}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1857929886
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857929883}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1998673550
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +640,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GeradorDeObstaculos
       objectReference: {fileID: 0}
+    - target: {fileID: 2089140411786914816, guid: e72bf86ba44091e41b18bf68d068d15b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089140411786914816, guid: e72bf86ba44091e41b18bf68d068d15b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3741301582541140274, guid: e72bf86ba44091e41b18bf68d068d15b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -651,7 +691,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2089140411786914816, guid: e72bf86ba44091e41b18bf68d068d15b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1857929886}
   m_SourcePrefab: {fileID: 100100000, guid: e72bf86ba44091e41b18bf68d068d15b, type: 3}
 --- !u!1001 &6015762915893331444
 PrefabInstance:
@@ -711,10 +754,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8775759966403192082, guid: a25e4c1f738b7984c8b311e04f89b450, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6966214465430934421, guid: a25e4c1f738b7984c8b311e04f89b450, type: 3}
+    - target: {fileID: 8775759966403192082, guid: a25e4c1f738b7984c8b311e04f89b450, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -733,18 +779,6 @@ PrefabInstance:
     - target: {fileID: 1555383847413875202, guid: 95c5d7cb1e49f654899f42f194dd60f6, type: 3}
       propertyPath: m_Name
       value: Coin
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194327920878651289, guid: 95c5d7cb1e49f654899f42f194dd60f6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194327920878651289, guid: 95c5d7cb1e49f654899f42f194dd60f6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2194327920878651289, guid: 95c5d7cb1e49f654899f42f194dd60f6, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2194327920878651289, guid: 95c5d7cb1e49f654899f42f194dd60f6, type: 3}
       propertyPath: m_LocalPosition.x
