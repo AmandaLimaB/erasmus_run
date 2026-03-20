@@ -25,4 +25,18 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+
+    // Use OnTriggerEnter se o item for um "fantasma" ou OnCollisionEnter se for sólido
+    void OnTriggerEnter(Collider outro)
+{
+    if (outro.CompareTag("Pickup"))
+    {
+        // Desativamos o colisor do item IMEDIATAMENTE para ele não ser pego de novo
+        outro.enabled = false; 
+
+        FindObjectOfType<Pontuacao>().AdicionarPonto();
+        Destroy(outro.gameObject); // :)
+    }
+}
+
 }
