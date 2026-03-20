@@ -752,6 +752,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: X Bot@Running
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 110308ec3d4a430478bd1ce1c6922889, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a36e624cbe6d88c4091343af0739ad4e, type: 2}
+    - target: {fileID: 7078722787440015773, guid: 110308ec3d4a430478bd1ce1c6922889, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.53865814
+      objectReference: {fileID: 0}
+    - target: {fileID: 7078722787440015773, guid: 110308ec3d4a430478bd1ce1c6922889, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.51735914
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
