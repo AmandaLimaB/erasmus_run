@@ -5,20 +5,29 @@ public class PlayerController : MonoBehaviour
 {
     public float velocidade = 5f;
     public GameManager gameManager;
+    
+    private Animator anim; // NOVO: Variável para guardar o componente de animação
+
+    void Start()
+    {
+        // NOVO: Procuramos o Animator no modelo 3D que está dentro (filho) do Player
+        anim = GetComponentInChildren<Animator>();
+    }
 
     void Update()
     {
-        // Pega o input do teclado (A/D ou setas)
         float x = Input.GetAxis("Horizontal");
 
-        // Move o jogador para os lados
+        // Movimento lateral
         transform.Translate(x * velocidade * Time.deltaTime, 0, 0);
+
+        // NOVO: Se o animator existir, avisamos que ele deve estar correndo
+        // Geralmente, se o seu Animator só tem uma animação (Running), ela toca sozinha.
+        // Mas se houver parâmetros, você os usaria aqui.
     }
 
-    
     void OnCollisionEnter(Collision collision)
     {
-        // Se batermos em algo chamado "Obstaculo"
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("Morreu!");
@@ -26,17 +35,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Use OnTriggerEnter se o item for um "fantasma" ou OnCollisionEnter se for sólido
     void OnTriggerEnter(Collider outro)
-{
-    if (outro.CompareTag("Pickup"))
     {
-        // Desativamos o colisor do item IMEDIATAMENTE para ele não ser pego de novo
-        outro.enabled = false; 
-
-        FindObjectOfType<Pontuacao>().AdicionarPonto();
-        Destroy(outro.gameObject); // :)
+        if (outro.CompareTag("Pickup"))
+        {
+            outro.enabled = false; 
+            FindObjectOfType<Pontuacao>().AdicionarPonto();
+            Destroy(outro.gameObject);
+        }
     }
-}
-
 }
