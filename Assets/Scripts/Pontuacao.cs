@@ -4,18 +4,29 @@ using TMPro;
 public class Pontuacao : MonoBehaviour
 {
     public TextMeshProUGUI textoUI;
-    private int pontosTotal = 0; // Usamos int para números inteiros (1, 2, 3...)
+    private int pontosTotal = 0;
 
     void Start()
     {
         AtualizarTexto();
     }
 
-    // Esta função será chamada pelo Player ao coletar algo
     public void AdicionarPonto()
     {
         pontosTotal++;
         AtualizarTexto();
+        
+        // SALVAMENTO: Toda vez que ganha ponto, verificamos o recorde
+        int recordeAtual = PlayerPrefs.GetInt("Recorde", 0);
+        
+        if (pontosTotal > recordeAtual)
+        {
+            PlayerPrefs.SetInt("Recorde", pontosTotal);
+            PlayerPrefs.Save(); // Garante que salvou no disco
+        }
+        
+        // Opcional: Salvar a pontuação da última partida para mostrar no Game Over
+        PlayerPrefs.SetInt("PontuacaoFinal", pontosTotal);
     }
 
     void AtualizarTexto()

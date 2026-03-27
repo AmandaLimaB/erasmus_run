@@ -33,7 +33,12 @@ public class PlayerController : MonoBehaviour
     {
         // Verificamos se colidimos com algo que tenha a Tag "Obstacle"
         if (collision.gameObject.CompareTag("Obstacle"))
-        {
+        {   
+            // Se o jogador não pegou nada, salvamos 0 como pontuação final da rodada
+            if(PlayerPrefs.GetInt("PontuacaoFinal") != 0) {
+                // (Opcional) apenas para garantir que o valor resete para a nova partida
+            }
+            SceneManager.LoadScene("GameOver");
             Debug.Log("Morreu! Indo para Game Over.");
             
             // LINHA ANTERIOR (Que reiniciava a fase):
