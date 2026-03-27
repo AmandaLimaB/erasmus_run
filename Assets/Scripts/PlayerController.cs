@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float velocidade = 5f;
-    public GameManager gameManager;
+    public GameManager gameManager; // Nota: Veja se você ainda está usando esse GameManager, se não, pode remover.
     
-    private Animator anim; // NOVO: Variável para guardar o componente de animação
+    private Animator anim; // Variável para guardar o componente de animação
 
     void Start()
     {
-        // NOVO: Procuramos o Animator no modelo 3D que está dentro (filho) do Player
+        // Procuramos o Animator no modelo 3D que está dentro (filho) do Player
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -21,17 +21,27 @@ public class PlayerController : MonoBehaviour
         // Movimento lateral
         transform.Translate(x * velocidade * Time.deltaTime, 0, 0);
 
-        // NOVO: Se o animator existir, avisamos que ele deve estar correndo
-        // Geralmente, se o seu Animator só tem uma animação (Running), ela toca sozinha.
-        // Mas se houver parâmetros, você os usaria aqui.
+        // Se o animator existir, avisamos que ele deve estar correndo
+        if (anim != null) 
+        {
+            // Aqui você ativaria os parâmetros da animação se necessário
+        }
     }
 
+    // --- AQUI ESTÁ A MUDANÇA PRINCIPAL ---
     void OnCollisionEnter(Collision collision)
     {
+        // Verificamos se colidimos com algo que tenha a Tag "Obstacle"
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("Morreu!");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Debug.Log("Morreu! Indo para Game Over.");
+            
+            // LINHA ANTERIOR (Que reiniciava a fase):
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            // NOVA LINHA (Que chama a cena de GameOver):
+            // O nome entre aspas deve ser EXATAMENTE igual ao nome da cena que você criou.
+            SceneManager.LoadScene("GameOver"); 
         }
     }
 
@@ -39,8 +49,11 @@ public class PlayerController : MonoBehaviour
     {
         if (outro.CompareTag("Pickup"))
         {
-            outro.enabled = false; 
-            FindObjectOfType<Pontuacao>().AdicionarPonto();
+            // Para garantir que o pickup seja destruído e o script Pontuacao funcione
+            if (FindObjectOfType<Pontuacao>() != null)
+            {
+                FindObjectOfType<Pontuacao>().AdicionarPonto();
+            }
             Destroy(outro.gameObject);
         }
     }
