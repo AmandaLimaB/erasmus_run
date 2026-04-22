@@ -1,25 +1,31 @@
 using UnityEngine;
 
-public class Obstaculo : MonoBehaviour
+public class MoverObstaculo : MonoBehaviour
 {
-    public float velocidade = 30f;
+    public float velocidade = 20f;
     private Rigidbody rb;
 
     void Start()
     {
-        // Pega o componente Rigidbody que você adicionou no Unity
         rb = GetComponent<Rigidbody>();
+        
+        // Se por acaso você esqueceu de tirar a gravidade no Unity, 
+        // o código faz isso agora para garantir.
+        if (rb != null)
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true; 
+        }
     }
 
-    // Usamos FixedUpdate para cálculos de física (exigência do enunciado!)
-    void FixedUpdate()
+    void Update()
     {
-        // Move o obstáculo fisicamente dando velocidade ao corpo dele
-        // Vector3.back é o mesmo que (0, 0, -1)
-        rb.linearVelocity = Vector3.back * velocidade;
+        // Se o Rigidbody falhar, usamos o Translate como plano B
+        // Isso garante que o objeto VAI se mover de qualquer jeito
+        transform.Translate(Vector3.back * velocidade * Time.deltaTime);
 
-        // Se ele passou do jogador, remove o objeto para economizar memória
-        if (transform.position.z < -45f)
+        // Destrói o objeto quando ele passar muito do jogador
+        if (transform.position.z < -40f)
         {
             Destroy(gameObject);
         }
