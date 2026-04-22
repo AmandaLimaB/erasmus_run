@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     public GameObject moedaPrefab;
 
     [Header("Configurações do Jogo")]
-    public float tempoEspera = 0.5f; 
+    public float tempoEspera = 0.3f; 
     [Range(0, 1)] public float chanceObstaculo = 0.7f;
 
     [Header("Configurações de Pistas")]

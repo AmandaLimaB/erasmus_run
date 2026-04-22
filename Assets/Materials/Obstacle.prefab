@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1fdf8683ba5594ca6fe7c7ac5da971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstaculo
-  velocidade: 10
+  velocidade: 8
 --- !u!54 &7438035106001518609
 Rigidbody:
   m_ObjectHideFlags: 0

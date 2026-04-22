@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public AudioClip somBatida;
     public float velocidade = 5f;
     public GameManager gameManager; // Nota: Veja se você ainda está usando esse GameManager, se não, pode remover.
     
@@ -30,25 +32,33 @@ public class PlayerController : MonoBehaviour
 
     // --- AQUI ESTÁ A MUDANÇA PRINCIPAL ---
     void OnCollisionEnter(Collision collision)
-    {
-        // Verificamos se colidimos com algo que tenha a Tag "Obstacle"
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {   
-            // Se o jogador não pegou nada, salvamos 0 como pontuação final da rodada
-            if(PlayerPrefs.GetInt("PontuacaoFinal") != 0) {
-                // (Opcional) apenas para garantir que o valor resete para a nova partida
-            }
-            SceneManager.LoadScene("GameOver");
-            Debug.Log("Morreu! Indo para Game Over.");
-            
-            // LINHA ANTERIOR (Que reiniciava a fase):
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-            // NOVA LINHA (Que chama a cena de GameOver):
-            // O nome entre aspas deve ser EXATAMENTE igual ao nome da cena que você criou.
-            SceneManager.LoadScene("GameOver"); 
+{
+    if (collision.gameObject.CompareTag("Obstacle"))
+    { 
+        // 1. Toca o som (usando PlayClipAtPoint para garantir a persistência)
+        if (somBatida != null)
+        {
+            AudioSource.PlayClipAtPoint(somBatida, Camera.main.transform.position);
         }
+
+        Debug.Log("Bateu! Aguardando o som para carregar Game Over...");
+
+        // 2. AGENDAMENTO: Espera 0.3 segundos e chama a função de carregar a cena
+        // Isso dá tempo do áudio tocar antes da cena ser destruída
+        Invoke("CarregarCenaGameOver", 0.3f); 
+        
+        // IMPORTANTE: Desativamos o movimento do player para ele não continuar 
+        // andando durante esse pequeno atraso do som
+        this.enabled = false; 
     }
+}
+
+// 3. NOVA FUNÇÃO: Ela será chamada pelo Invoke acima
+void CarregarCenaGameOver()
+{
+    // O nome aqui deve ser EXATAMENTE o nome da sua cena no Build Settings
+    SceneManager.LoadScene("GameOver");
+}
 
     void OnTriggerEnter(Collider outro)
     {

@@ -155,5 +155,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356eb54ba8e84cd4d9bd83946a8458cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  somBatida: {fileID: 8300000, guid: 197b80b06e8007948947368bfa37879f, type: 3}
   velocidade: 5
-  gameManager: {fileID: 0}

@@ -3,6 +3,8 @@ using TMPro;
 
 public class Pontuacao : MonoBehaviour
 {
+
+    public AudioClip somMoeda;
     public TextMeshProUGUI textoUI;
     private int pontosTotal = 0;
 
@@ -13,6 +15,14 @@ public class Pontuacao : MonoBehaviour
 
     public void AdicionarPonto()
     {
+
+        // Toca o som na posição da câmera (para o som ser nítido)
+        if (somMoeda != null)
+        {
+            AudioSource.PlayClipAtPoint(somMoeda, Camera.main.transform.position);
+        }
+
+
         pontosTotal++;
         AtualizarTexto();
         
