@@ -9,8 +9,6 @@ public class MoverObstaculo : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         
-        // Se por acaso você esqueceu de tirar a gravidade no Unity, 
-        // o código faz isso agora para garantir.
         if (rb != null)
         {
             rb.useGravity = false;
@@ -20,11 +18,11 @@ public class MoverObstaculo : MonoBehaviour
 
     void Update()
     {
-        // Se o Rigidbody falhar, usamos o Translate como plano B
-        // Isso garante que o objeto VAI se mover de qualquer jeito
-        transform.Translate(Vector3.back * velocidade * Time.deltaTime);
+        // ADICIONADO: Space.World
+        // Isso impede que a rotação da moeda mude a direção do movimento
+        transform.Translate(Vector3.back * velocidade * Time.deltaTime, Space.World);
 
-        // Destrói o objeto quando ele passar muito do jogador
+        // Destrói o objeto quando ele passar do jogador
         if (transform.position.z < -40f)
         {
             Destroy(gameObject);
