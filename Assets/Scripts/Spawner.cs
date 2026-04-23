@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
         float sorteioTipo = Random.value;
 
         // Usa a posição Z do Spawner para que eles não nasçam no ponto 0
-        Vector3 posicaoSpawn = new Vector3(posicaoX, transform.position.y, transform.position.z);
+        Vector3 posicaoSpawn = new Vector3(posicaoX, 0f, transform.position.z);
 
         if (sorteioTipo <= chanceObstaculo)
         {
